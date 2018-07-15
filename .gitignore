@@ -138,3 +138,7 @@ html/
 
 ######################### Validation Scripts & Testing #########################
 output*/
+
+res.avi
+caffe-tensorflow/*
+res_*.avi

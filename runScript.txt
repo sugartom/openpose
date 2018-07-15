@@ -1,0 +1,17 @@
+# In order to compile
+mkdir build
+cd build
+cmake -DCaffe_INCLUDE_DIRS=/home/yitao/Documents/fun-project/caffe/build/install/include \
+  -DCaffe_LIBS=/home/yitao/Documents/fun-project/caffe/build/install/lib/libcaffe.so -DBUILD_CAFFE=OFF -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF ..
+make -j`nproc`
+
+# To run demo
+./build/examples/openpose/openpose.bin --video ~/Documents/fun-project/actions_demo/videos/indoor_two_ppl.avi --write_video res.avi
+
+# For caffe-tensorflow
+cd caffe-tensorflow
+Then download pose_deploy_linevec_faster_4_stages.prototxt and pose_iter_160000.caffemodel
+wget https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/models/pose/mpi/pose_deploy_linevec_faster_4_stages.prototxt
+wget http://posefs1.perception.cs.cmu.edu/OpenPose/models/pose/mpi/pose_iter_160000.caffemodel
+./convert.py caffe_openpose/pose_deploy_linevec_faster_4_stages.prototxt --code-output-path=caffe_openpose/path.py
+./convert.py caffe_openpose/pose_deploy_linevec_faster_4_stages.prototxt --caffemodel caffe_openpose/pose_iter_160000.caffemodel --data-output-path=caffe_openpose/path.npy
